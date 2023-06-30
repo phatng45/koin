@@ -16,9 +16,39 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Koin',
       theme: ThemeData(
-        fontFamily: GoogleFonts.roboto().fontFamily,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
-            .copyWith(background: Colors.white),
+        scaffoldBackgroundColor: Colors.blueGrey,
+        // textTheme: TextTheme(
+        //   labelLarge: TextStyle(
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
+        // useMaterial3: true,
+        // buttonTheme: ButtonThemeData(
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(5.0), // Set the border radius
+        //   ),
+        // ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(8.0), // Set the border radius
+              ),
+            ),
+            textStyle: MaterialStateProperty.all<TextStyle>(
+              TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        // fontFamily: GoogleFonts.roboto(color: Colors.grey[800]).fontFamily,
+        textTheme: GoogleFonts.robotoTextTheme().copyWith(
+          displayLarge: TextStyle(color: Colors.grey[800]),
+          bodyMedium: TextStyle(color: Colors.grey[500]),
+        ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
       ),
       home: LoginPage(),
     );

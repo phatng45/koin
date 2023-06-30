@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,9 +12,109 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(child: Text("abc")),
+        body: SafeArea(
+            child: Column(children: <Widget>[
+      Padding(
+        padding: EdgeInsets.fromLTRB(0, 160, 0, 20),
+        child: Text(
+          "Koin",
+          style: GoogleFonts.righteous(
+              fontSize: 50, fontWeight: FontWeight.w500, color: Colors.white),
+        ),
       ),
-    );
+      MyContainer(
+        child: Column(children: <Widget>[
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
+                child: Text(
+                  "Welcome back!",
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: Colors.grey,
+                        fontSize: 25,
+                      ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ],
+          ),
+          MyContainer(
+              child: TextField(
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Your Private Key",
+                icon: Icon(Icons.lock)),
+          )),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text("Login"),
+            ),
+          ),
+          Text(
+            "Don't have a wallet?",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          ElevatedButton(onPressed: () {}, child: Text("Create a Koin Wallet")),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: MyContainer(
+                child: TextField(
+              enabled: false,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Private Key",
+                isDense: true,
+              ),
+            )),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: MyContainer(
+                child: TextField(
+              enabled: false,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Public Key",
+                isDense: true,
+              ),
+            )),
+          ),
+        ]),
+      )
+    ])));
+  }
+}
+
+class MyContainer extends StatelessWidget {
+  MyContainer(
+      {super.key, required this.child, this.padding, this.marginHorizontal});
+
+  final Widget child;
+  double? padding;
+  double? marginHorizontal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.symmetric(horizontal: marginHorizontal ?? 10),
+        padding: EdgeInsets.all(padding ?? 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              color: Color(0x44000000),
+              offset: Offset(0, 0),
+            )
+          ],
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Colors.white, // Color(0x98E4E4E4),
+          ),
+        ),
+        child: child);
   }
 }
