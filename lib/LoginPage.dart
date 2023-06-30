@@ -11,6 +11,55 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    return IntroPage(
+        child: Column(children: <Widget>[
+      Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
+            child: Text(
+              "Welcome back!",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: 25,
+                  ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ],
+      ),
+      MyContainer(
+          child: TextField(
+        decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Your Private Key",
+            icon: Icon(Icons.lock)),
+      )),
+      Padding(
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: ElevatedButton(
+          onPressed: () {},
+          child: Text("Login"),
+        ),
+      ),
+      Text(
+        "Don't have a wallet?",
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+      ElevatedButton(onPressed: () {}, child: Text("Create a Koin Wallet")),
+    ]));
+  }
+}
+
+class IntroPage extends StatelessWidget {
+  IntroPage({
+    super.key,
+    this.child,
+  });
+
+  Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
             child: Column(children: <Widget>[
@@ -23,66 +72,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       MyContainer(
-        child: Column(children: <Widget>[
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
-                child: Text(
-                  "Welcome back!",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.grey,
-                        fontSize: 25,
-                      ),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ],
-          ),
-          MyContainer(
-              child: TextField(
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Your Private Key",
-                icon: Icon(Icons.lock)),
-          )),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text("Login"),
-            ),
-          ),
-          Text(
-            "Don't have a wallet?",
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          ElevatedButton(onPressed: () {}, child: Text("Create a Koin Wallet")),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            child: MyContainer(
-                child: TextField(
-              enabled: false,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Private Key",
-                isDense: true,
-              ),
-            )),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: MyContainer(
-                child: TextField(
-              enabled: false,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Public Key",
-                isDense: true,
-              ),
-            )),
-          ),
-        ]),
+        child: child ?? SizedBox.shrink(),
       )
     ])));
   }

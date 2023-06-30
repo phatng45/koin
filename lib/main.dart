@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koin/CreateWalletPage.dart';
 
 import 'LoginPage.dart';
 
@@ -45,12 +46,13 @@ class MyApp extends StatelessWidget {
         ),
         // fontFamily: GoogleFonts.roboto(color: Colors.grey[800]).fontFamily,
         textTheme: GoogleFonts.robotoTextTheme().copyWith(
-          displayLarge: TextStyle(color: Colors.grey[800]),
-          bodyMedium: TextStyle(color: Colors.grey[500]),
+          titleLarge: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.normal),
+          displayLarge: TextStyle(color: Colors.grey[700]),
+          bodyMedium: TextStyle(color: Colors.grey[700]),
         ),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
       ),
-      home: LoginPage(),
+      home: CreateWalletPage(),
     );
   }
 }
