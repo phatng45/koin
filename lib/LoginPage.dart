@@ -41,11 +41,19 @@ class _LoginPageState extends State<LoginPage> {
           child: Text("Login"),
         ),
       ),
-      Text(
-        "Don't have a wallet?",
-        style: Theme.of(context).textTheme.bodyMedium,
+      Padding(
+        padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Don't have a wallet?",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            TextButton(onPressed: () {}, child: Text("Create one!")),
+          ],
+        ),
       ),
-      ElevatedButton(onPressed: () {}, child: Text("Create a Koin Wallet")),
     ]));
   }
 }

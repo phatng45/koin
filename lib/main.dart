@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koin/CreateWalletPage.dart';
+import 'package:koin/HomePage.dart';
 
 import 'LoginPage.dart';
 
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
       ),
-      home: CreateWalletPage(),
+      home: HomePage(),
     );
   }
 }

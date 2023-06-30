@@ -67,7 +67,7 @@ class CreateWalletPage extends StatelessWidget {
           ),
           Padding(
               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-              child: TextButton(onPressed: () {}, child: Text("Login")))
+              child: TextButton(onPressed: () {}, child: Text("Back to Login")))
         ],
       ),
     );
