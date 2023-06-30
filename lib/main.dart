@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koin/CreateWalletPage.dart';
 import 'package:koin/HomePage.dart';
-
-import 'LoginPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,11 +44,17 @@ class MyApp extends StatelessWidget {
         ),
         // fontFamily: GoogleFonts.roboto(color: Colors.grey[800]).fontFamily,
         textTheme: GoogleFonts.robotoTextTheme().copyWith(
-          titleLarge: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.normal),
+          titleLarge:
+              TextStyle(color: Colors.grey[500], fontWeight: FontWeight.normal),
           displayLarge: TextStyle(color: Colors.grey[700]),
           bodyMedium: TextStyle(color: Colors.grey[700]),
         ),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.white.withAlpha(50), // Set the FAB color
+          elevation: 0,
+          iconSize: 30,
+        ),
       ),
       home: HomePage(),
     );
