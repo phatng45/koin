@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'TabScreen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -9,6 +11,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _tabIndex = 0;
+  final List<Widget> _tabs = [
+    // Replace these with your own tab views
+    TabScreen(title: 'Tab 0'),
+    TabScreen(title: 'Tab 1'),
+    TabScreen(title: 'Tab 2'),
+    TabScreen(title: 'Tab 3'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,52 +33,11 @@ class _HomePageState extends State<HomePage> {
         ),
         elevation: 0.0,
         leadingWidth: 120,
-        // leading: Padding(
-        //   padding: const EdgeInsets.only(left: 8.0),
-        //   child: Row(
-        //     children: [
-        //       const Text(
-        //         'EN',
-        //         style: TextStyle(color: Colors.white),
-        //       )
-        //     ],
-        //   ),
-        // ),
-        // actions: [
-        //   Builder(
-        //     builder: (context) => IconButton(
-        //       icon: const Icon(Icons.more_horiz),
-        //       iconSize: 30,
-        //       color: Colors.white,
-        //       onPressed: () => Scaffold.of(context).openEndDrawer(),
-        //       tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-        //     ),
-        //   ),
-        // ],
       ),
       bottomNavigationBar: _buildBottomAppBar(),
       floatingActionButton: _buildFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            // Expanded(
-            //     child: Container(
-            //         decoration: BoxDecoration(
-            //             borderRadius: const BorderRadius.only(
-            //                 topLeft: Radius.circular(20),
-            //                 topRight: Radius.circular(20)),
-            //             color: Colors.white),
-            //         child: ClipRRect(
-            //             borderRadius: const BorderRadius.only(
-            //                 topLeft: Radius.circular(20),
-            //                 topRight: Radius.circular(20)),
-            //             child: Center(
-            //               child: Text("abc"),
-            //             )))),
-          ],
-        ),
-      ),
+      body: SafeArea(child: _tabs[_tabIndex]),
     );
   }
 
@@ -78,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         width: 65,
         height: 65,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => setState(() => _tabIndex = 0),
           tooltip: 'Create',
           child: const Icon(Icons.wallet),
         ),
@@ -99,18 +69,18 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               tooltip: 'Open navigation menu',
               icon: const Icon(Icons.menu),
-              onPressed: () {},
+              onPressed: () => setState(() => _tabIndex = 1),
             ),
             const Spacer(),
             IconButton(
               tooltip: 'Search',
               icon: const Icon(Icons.search),
-              onPressed: () {},
+              onPressed: () => setState(() => _tabIndex = 2),
             ),
             IconButton(
               tooltip: 'Favorite',
               icon: const Icon(Icons.favorite),
-              onPressed: () {},
+              onPressed: () => setState(() => _tabIndex = 3),
             ),
           ],
         ),
