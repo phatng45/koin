@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koin/WalletPage.dart';
 
 import 'TabScreen.dart';
 
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   int _tabIndex = 0;
   final List<Widget> _tabs = [
     // Replace these with your own tab views
-    TabScreen(title: 'Tab 0'),
+    WalletPage(),
     TabScreen(title: 'Tab 1'),
     TabScreen(title: 'Tab 2'),
     TabScreen(title: 'Tab 3'),

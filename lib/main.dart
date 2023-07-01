@@ -16,17 +16,6 @@ class MyApp extends StatelessWidget {
       title: 'Koin',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.blueGrey,
-        // textTheme: TextTheme(
-        //   labelLarge: TextStyle(
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-        // useMaterial3: true,
-        // buttonTheme: ButtonThemeData(
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(5.0), // Set the border radius
-        //   ),
-        // ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -42,13 +31,16 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        // fontFamily: GoogleFonts.roboto(color: Colors.grey[800]).fontFamily,
         textTheme: GoogleFonts.robotoTextTheme().copyWith(
           titleLarge:
               TextStyle(color: Colors.grey[500], fontWeight: FontWeight.normal),
+          titleMedium:
+              TextStyle(color: Colors.grey[500], fontWeight: FontWeight.normal),
           displayLarge: TextStyle(color: Colors.grey[700]),
           bodyMedium: TextStyle(color: Colors.grey[700]),
+          headlineSmall: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold, fontSize: 20),
         ),
+        iconTheme: IconThemeData(color: Colors.grey[500]),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: Colors.white.withAlpha(50), // Set the FAB color
