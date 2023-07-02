@@ -29,21 +29,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        centerTitle: true,
-        title: Text(
-          "Koin",
-          style: GoogleFonts.righteous(
-              fontSize: 30, fontWeight: FontWeight.w500, color: Colors.white),
-        ),
-        elevation: 0.0,
-        leadingWidth: 120,
-      ),
+      appBar: _buildAppBar(),
       bottomNavigationBar: _buildBottomAppBar(),
       floatingActionButton: _buildFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SafeArea(child: _tabs[_tabIndex]),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.blueGrey,
+      centerTitle: true,
+      title: Text(
+        "Koin",
+        style: GoogleFonts.righteous(
+            fontSize: 30, fontWeight: FontWeight.w500, color: Colors.white),
+      ),
+      elevation: 0.0,
+      leadingWidth: 120,
     );
   }
 
