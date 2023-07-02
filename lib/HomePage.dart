@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koin/HistoryPage.dart';
+import 'package:koin/LoginPage.dart';
 import 'package:koin/WalletPage.dart';
+import 'package:koin/main.dart';
 
 import 'TabScreen.dart';
 import 'TransferPage.dart';
@@ -72,6 +74,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             PopupMenuButton(
               icon: const Icon(Icons.menu),
+              onSelected: (value) => {
+                if (value == "Logout") {MyApp.to(context, LoginPage())}
+              },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
                   value: "Logout",

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koin/CreateWalletPage.dart';
+import 'package:koin/HomePage.dart';
+import 'package:koin/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -37,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       Padding(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => MyApp.to(context, HomePage()),
           child: Text("Login"),
         ),
       ),
@@ -50,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               "Don't have a wallet?",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            TextButton(onPressed: () {}, child: Text("Create one!")),
+            TextButton(onPressed: () => MyApp.to(context, CreateWalletPage()), child: Text("Create one!")),
           ],
         ),
       ),

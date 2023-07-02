@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koin/LoginPage.dart';
+import 'package:koin/main.dart';
 
 class CreateWalletPage extends StatelessWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class CreateWalletPage extends StatelessWidget {
           ),
           Padding(
               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-              child: TextButton(onPressed: () {}, child: Text("Back to Login")))
+              child: TextButton(onPressed: () => MyApp.to(context, LoginPage()), child: Text("Back to Login")))
         ],
       ),
     );

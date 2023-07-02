@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koin/HomePage.dart';
+import 'package:koin/LoginPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,6 +9,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  static to(BuildContext context, Widget page) {
+    return Navigator.push(
+        context, MaterialPageRoute(builder: (context) => page));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +44,10 @@ class MyApp extends StatelessWidget {
               TextStyle(color: Colors.grey[500], fontWeight: FontWeight.normal),
           displayLarge: TextStyle(color: Colors.grey[700]),
           bodyMedium: TextStyle(color: Colors.grey[700]),
-          headlineSmall: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold, fontSize: 20),
+          headlineSmall: TextStyle(
+              color: Colors.grey[500],
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
         ),
         iconTheme: IconThemeData(color: Colors.grey[500]),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
@@ -48,7 +57,7 @@ class MyApp extends StatelessWidget {
           iconSize: 30,
         ),
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
