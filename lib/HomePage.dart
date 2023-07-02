@@ -5,6 +5,7 @@ import 'package:koin/LoginPage.dart';
 import 'package:koin/WalletPage.dart';
 import 'package:koin/main.dart';
 
+import 'BlocksPage.dart';
 import 'TabScreen.dart';
 import 'TransferPage.dart';
 
@@ -17,13 +18,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _tabIndex = 0;
-  final List<Widget> _tabs = [
+
+  List<Widget> _tabs = [
     // Replace these with your own tab views
     WalletPage(),
     TabScreen(title: 'Tab 1'),
     // TabScreen(title: 'Tab 2'),
     TransferPage(),
-    HistoryPage()
+    HistoryPage(),
+    BlocksPage(),
   ];
 
   @override
@@ -78,6 +81,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           children: <Widget>[
             PopupMenuButton(
+              padding: EdgeInsets.zero,
               icon: const Icon(Icons.menu),
               onSelected: (value) => {
                 if (value == "Logout") {MyApp.to(context, LoginPage())}
@@ -105,6 +109,10 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: const Icon(Icons.history),
               onPressed: () => setState(() => _tabIndex = 3),
+            ),
+            IconButton(
+              icon: const Icon(Icons.public),
+              onPressed: () => setState(() => _tabIndex = 4),
             ),
           ],
         ),
