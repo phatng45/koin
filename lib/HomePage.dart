@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koin/HistoryPage.dart';
 import 'package:koin/WalletPage.dart';
 
 import 'TabScreen.dart';
+import 'TransferPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,8 +19,9 @@ class _HomePageState extends State<HomePage> {
     // Replace these with your own tab views
     WalletPage(),
     TabScreen(title: 'Tab 1'),
-    TabScreen(title: 'Tab 2'),
-    TabScreen(title: 'Tab 3'),
+    // TabScreen(title: 'Tab 2'),
+    TransferPage(),
+    HistoryPage()
   ];
 
   @override
@@ -67,20 +70,30 @@ class _HomePageState extends State<HomePage> {
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
-            IconButton(
-              tooltip: 'Open navigation menu',
+            PopupMenuButton(
               icon: const Icon(Icons.menu),
-              onPressed: () => setState(() => _tabIndex = 1),
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                PopupMenuItem<String>(
+                  value: "Logout",
+                  child: ListTile(
+                      leading: Icon(Icons.logout, color: Colors.red),
+                      title: Text(
+                        'Logout',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: Colors.red),
+                      )),
+                ),
+              ],
             ),
             const Spacer(),
             IconButton(
-              tooltip: 'Search',
-              icon: const Icon(Icons.search),
+              icon: const Icon(Icons.sync_alt_outlined),
               onPressed: () => setState(() => _tabIndex = 2),
             ),
             IconButton(
-              tooltip: 'Favorite',
-              icon: const Icon(Icons.favorite),
+              icon: const Icon(Icons.history),
               onPressed: () => setState(() => _tabIndex = 3),
             ),
           ],
