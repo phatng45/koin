@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:koin/BlockDetailsPage.dart';
+import 'package:koin/main.dart';
 
 import 'LoginPage.dart';
 
@@ -65,7 +67,7 @@ class _BlocksPageState extends State<BlocksPage> {
                 foregroundColor: Colors.grey,
                 backgroundColor: Colors.blueGrey[50],
                 elevation: 0),
-            onPressed: () {},
+            onPressed: () => MyApp.to(context, BlockDetailsPage(id: blockId)),
             child: Align(
               alignment: const Alignment(-1, 0),
               child: Text(

@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 20),
         ),
+        dividerTheme: DividerThemeData(thickness: 1.2),
         iconTheme: IconThemeData(color: Colors.grey[500]),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
         floatingActionButtonTheme: FloatingActionButtonThemeData(

@@ -59,7 +59,7 @@ class _HistoryPageState extends State<HistoryPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Divider(thickness: 1.2),
+          Divider(),
           Row(
             children: <Widget>[
               Text(from),
