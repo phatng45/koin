@@ -33,11 +33,13 @@ class CreateWalletPage extends StatelessWidget {
                   children: [
                     TextSpan(
                         text: "Private Key",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        // style: TextStyle(fontWeight: FontWeight.bold)
+                    ),
                     TextSpan(text: " to login and "),
                     TextSpan(
                         text: "Public Key",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        // style: TextStyle(fontWeight: FontWeight.bold)
+                    ),
                     TextSpan(text: " for the transactions.")
                   ]),
             ),

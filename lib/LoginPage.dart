@@ -103,7 +103,7 @@ class MyContainer extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: marginHorizontal ?? 10),
         padding: EdgeInsets.all(padding ?? 5),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white12,
           boxShadow: [
             BoxShadow(
               blurRadius: 10,
@@ -113,7 +113,7 @@ class MyContainer extends StatelessWidget {
           ],
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: Colors.white, // Color(0x98E4E4E4),
+            color: Colors.white12, // Color(0x98E4E4E4),
           ),
         ),
         child: child);

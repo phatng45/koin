@@ -109,6 +109,7 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
 
   _buildAppBar() {
     return AppBar(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0,
     );
   }

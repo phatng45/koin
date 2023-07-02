@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   AppBar _buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       centerTitle: true,
       title: Text(
         "Koin",
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
     return BottomAppBar(
       height: 60,
       shape: CircularNotchedRectangle(),
-      color: Colors.white.withAlpha(30),
+      color: Colors.white.withAlpha(70),
       elevation: 0,
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
@@ -82,7 +82,10 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             PopupMenuButton(
               padding: EdgeInsets.zero,
-              icon: const Icon(Icons.menu),
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
               onSelected: (value) => {
                 if (value == "Logout") {MyApp.to(context, LoginPage())}
               },
@@ -103,15 +106,24 @@ class _HomePageState extends State<HomePage> {
             ),
             const Spacer(),
             IconButton(
-              icon: const Icon(Icons.sync_alt_outlined),
+              icon: const Icon(
+                Icons.sync_alt_outlined,
+                color: Colors.white,
+              ),
               onPressed: () => setState(() => _tabIndex = 2),
             ),
             IconButton(
-              icon: const Icon(Icons.history),
+              icon: const Icon(
+                Icons.history,
+                color: Colors.white,
+              ),
               onPressed: () => setState(() => _tabIndex = 3),
             ),
             IconButton(
-              icon: const Icon(Icons.public),
+              icon: const Icon(
+                Icons.public,
+                color: Colors.white,
+              ),
               onPressed: () => setState(() => _tabIndex = 4),
             ),
           ],

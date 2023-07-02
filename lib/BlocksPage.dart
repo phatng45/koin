@@ -64,18 +64,15 @@ class _BlocksPageState extends State<BlocksPage> {
         width: double.maxFinite,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.grey,
-                backgroundColor: Colors.blueGrey[50],
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.white12,
                 elevation: 0),
             onPressed: () => MyApp.to(context, BlockDetailsPage(id: blockId)),
             child: Align(
               alignment: const Alignment(-1, 0),
               child: Text(
                 blockId,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: Colors.grey[700]),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             )),
       ),
