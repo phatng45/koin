@@ -5,10 +5,19 @@ class ApiServices {
 
   static Future<dynamic>? GetAllTransactions() async {
     final response = await Dio().get('$baseUrl/transactions');
-
     if (response.statusCode != 200) return null;
     return response.data;
   }
-}
 
-class Transaction {}
+  static Future<dynamic>? Login(String privateKey) async {
+    final response = await Dio().post('$baseUrl/logIn', data: privateKey);
+    if (response.statusCode != 200) return null;
+
+
+    // localStorage.setItem('publicKey', data.publicKey);
+    // localStorage.setItem('privateKey', data.privateKey);
+
+    return response.data;
+  }
+
+}
