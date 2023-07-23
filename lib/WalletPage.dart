@@ -13,6 +13,7 @@ class WalletPage extends StatefulWidget {
 
 class _WalletPageState extends State<WalletPage> {
   int? balance;
+  bool isHiding = false;
 
   @override
   void initState() {
@@ -36,10 +37,6 @@ class _WalletPageState extends State<WalletPage> {
           child: Container(
             width: double.maxFinite,
             padding: EdgeInsets.all(5),
-            // margin: EdgeInsets.all(20),
-            // decoration: BoxDecoration(
-            //     color: Colors.white.withAlpha(50),
-            //     borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Column(
@@ -53,9 +50,13 @@ class _WalletPageState extends State<WalletPage> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () => setState(() {
+                                isHiding = !isHiding;
+                              }),
                           icon: Icon(
-                            Icons.visibility,
+                            isHiding
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility,
                             size: 30,
                           ))
                     ],
@@ -64,7 +65,7 @@ class _WalletPageState extends State<WalletPage> {
                     height: 5,
                   ),
                   Text(
-                    (balance ?? 0).toString() + '\$',
+                    isHiding ? '***\$' : (balance ?? 0).toString() + '\$',
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall
@@ -93,7 +94,9 @@ class _WalletPageState extends State<WalletPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          HomePage.privateKey ?? 'N/A',
+                          isHiding
+                              ? '***********************************'
+                              : HomePage.privateKey ?? 'N/A',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
@@ -137,8 +140,31 @@ class _WalletPageState extends State<WalletPage> {
               ),
             ),
           ),
-        )
+        ),
+        Container(
+            width: 120,
+            height: 50,
+            child: ElevatedButton(
+                onPressed: mine,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(Icons.currency_exchange_rounded),
+                    Text(
+                      'Mine',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontSize: 20, color: Colors.black),
+                    ),
+                  ],
+                )))
       ],
     );
+  }
+
+  void mine() async {
+    await ApiServices.Mine();
+    getBalance();
   }
 }

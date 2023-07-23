@@ -33,4 +33,18 @@ class ApiServices {
     if (response.statusCode != 200) return null;
     return response.data;
   }
+
+  static Future<dynamic>?  GetHistory() async{
+    final response = await Dio().get('$baseUrl/history');
+    if (response.statusCode != 200) return null;
+    print(response.data);
+    return response.data;
+  }
+
+  static  Future<dynamic>? Mine() async {
+    final response = await Dio().get('$baseUrl/mine-transactions');
+    if (response.statusCode != 200) return null;
+    print(response.data);
+    return response.data;
+  }
 }
