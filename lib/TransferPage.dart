@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koin/api/ApiServices.dart';
 
 import 'LoginPage.dart';
 
@@ -10,6 +11,9 @@ class TransferPage extends StatefulWidget {
 }
 
 class _TransferPageState extends State<TransferPage> {
+  TextEditingController publicKeyTextController = TextEditingController();
+  TextEditingController amountTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,10 +55,11 @@ class _TransferPageState extends State<TransferPage> {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                         child: TextField(
+                          controller: publicKeyTextController,
                           decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Public Key",
-                          ),
+                              border: InputBorder.none,
+                              labelText: "Public Key",
+                              labelStyle: TextStyle(color: Colors.white)),
                         ),
                       )),
                   SizedBox(
@@ -65,10 +70,11 @@ class _TransferPageState extends State<TransferPage> {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                         child: TextField(
+                          controller: amountTextController,
                           decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Amount",
-                          ),
+                              border: InputBorder.none,
+                              labelText: "Amount",
+                              labelStyle: TextStyle(color: Colors.white)),
                         ),
                       )),
                   Row(
@@ -77,7 +83,7 @@ class _TransferPageState extends State<TransferPage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: transfer,
                           child: Text("Transfer"),
                         ),
                       ),
@@ -90,5 +96,17 @@ class _TransferPageState extends State<TransferPage> {
         ),
       ],
     );
+  }
+
+  void transfer() async {
+    var response = await ApiServices.Transfer(
+        publicKeyTextController.text, amountTextController.text);
+    if (response != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Transferred successfully')));
+    }else{
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Transaction failed')));
+    }
   }
 }
