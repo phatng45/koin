@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ApiServices {
   static String baseUrl = 'http://10.0.2.2:3000';
@@ -13,11 +14,15 @@ class ApiServices {
     final response = await Dio().post('$baseUrl/logIn', data: privateKey);
     if (response.statusCode != 200) return null;
 
-
-    // localStorage.setItem('publicKey', data.publicKey);
-    // localStorage.setItem('privateKey', data.privateKey);
-
     return response.data;
   }
 
+  static Future<dynamic>? SignUp() async {
+    final response = await Dio().get('$baseUrl/signUp');
+    if (response.statusCode != 200) return null;
+
+    print(response.data);
+
+    return response.data;
+  }
 }
