@@ -27,4 +27,10 @@ class ApiServices {
     if (response.statusCode != 200) return null;
     return response.data;
   }
+
+  static Future<dynamic>?  GetBalance() async{
+    final response = await Dio().get('$baseUrl/balance');
+    if (response.statusCode != 200) return null;
+    return response.data;
+  }
 }

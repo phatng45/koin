@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:koin/HomePage.dart';
 import 'package:koin/LoginPage.dart';
+import 'package:koin/api/ApiServices.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({Key? key}) : super(key: key);
@@ -11,6 +12,21 @@ class WalletPage extends StatefulWidget {
 }
 
 class _WalletPageState extends State<WalletPage> {
+  int? balance;
+
+  @override
+  void initState() {
+    getBalance();
+    super.initState();
+  }
+
+  void getBalance() async {
+    var response = await ApiServices.GetBalance();
+    setState(() {
+      balance = response['balance'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,7 +64,7 @@ class _WalletPageState extends State<WalletPage> {
                     height: 5,
                   ),
                   Text(
-                    "8.88\$",
+                    (balance ?? 0).toString() + '\$',
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall
