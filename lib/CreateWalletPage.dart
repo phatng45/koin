@@ -22,13 +22,13 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     var data = await ApiServices.SignUp();
 
     setState(() {
-      privateKey = data['privateKey'];
-      publicKey = data['publicKey'];
+      privateKeyTextController.text = data['privateKey'];
+      publicTextController.text = data['publicKey'];
     });
   }
 
-  String? privateKey;
-  String? publicKey;
+  TextEditingController privateKeyTextController = TextEditingController();
+  TextEditingController publicTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +71,17 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: MyContainer(
                 child: TextField(
+              controller: privateKeyTextController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  labelText: privateKey ?? '...',
+                  labelText: 'Private key',
                   isDense: true,
                   labelStyle: TextStyle(color: Colors.white),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.copy, color: Colors.white),
                     onPressed: () async {
-                      await Clipboard.setData(ClipboardData(text: privateKey));
+                      await Clipboard.setData(ClipboardData(text: privateKeyTextController.text));
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Copied to clipboard')));
                     },
@@ -91,16 +92,17 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: MyContainer(
                 child: TextField(
+              controller: publicTextController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  labelText: publicKey ?? '...',
+                  labelText: 'Public key',
                   isDense: true,
                   labelStyle: TextStyle(color: Colors.white),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.copy, color: Colors.white),
                     onPressed: () async {
-                      await Clipboard.setData(ClipboardData(text: publicKey));
+                      await Clipboard.setData(ClipboardData(text: publicTextController.text));
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Copied to clipboard')));
                     },

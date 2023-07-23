@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:koin/HistoryPage.dart';
 import 'package:koin/LoginPage.dart';
 import 'package:koin/WalletPage.dart';
+import 'package:koin/api/ApiServices.dart';
 import 'package:koin/main.dart';
 
 import 'BlocksPage.dart';
@@ -11,6 +12,9 @@ import 'TransferPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  static String? privateKey;
+  static String? publicKey;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -86,9 +90,7 @@ class _HomePageState extends State<HomePage> {
                 Icons.menu,
                 color: Colors.white,
               ),
-              onSelected: (value) => {
-                if (value == "Logout") {MyApp.to(context, LoginPage())}
-              },
+              onSelected: (value) => {if (value == "Logout") logout()},
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
                   value: "Logout",
@@ -130,5 +132,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void logout() async {
+    await ApiServices.Logout();
+
+    HomePage.privateKey = null;
+    HomePage.publicKey = null;
+
+    MyApp.to(context, LoginPage());
   }
 }

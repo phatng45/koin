@@ -11,18 +11,20 @@ class ApiServices {
   }
 
   static Future<dynamic>? Login(String privateKey) async {
-    final response = await Dio().post('$baseUrl/logIn', data: privateKey);
+    final response = await Dio().post('$baseUrl/logIn', data: {'privateKey': privateKey});
     if (response.statusCode != 200) return null;
-
     return response.data;
   }
 
   static Future<dynamic>? SignUp() async {
     final response = await Dio().get('$baseUrl/signUp');
     if (response.statusCode != 200) return null;
+    return response.data;
+  }
 
-    print(response.data);
-
+  static Future<dynamic>? Logout() async {
+    final response = await Dio().get('$baseUrl/logOut');
+    if (response.statusCode != 200) return null;
     return response.data;
   }
 }

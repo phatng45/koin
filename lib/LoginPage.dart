@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koin/CreateWalletPage.dart';
 import 'package:koin/HomePage.dart';
+import 'package:koin/api/ApiServices.dart';
 import 'package:koin/main.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController privateKeyTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return IntroPage(
@@ -32,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       MyContainer(
           child: TextField(
+        controller: privateKeyTextController,
         decoration: InputDecoration(
             border: InputBorder.none,
             hintText: "Your Private Key",
@@ -40,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
       Padding(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: ElevatedButton(
-          onPressed: () => MyApp.to(context, HomePage()),
+          onPressed: login,
           child: Text("Login"),
         ),
       ),
@@ -53,11 +57,22 @@ class _LoginPageState extends State<LoginPage> {
               "Don't have a wallet?",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            TextButton(onPressed: () => MyApp.to(context, CreateWalletPage()), child: Text("Create one!")),
+            TextButton(
+                onPressed: () => MyApp.to(context, CreateWalletPage()),
+                child: Text("Create one!")),
           ],
         ),
       ),
     ]));
+  }
+
+  void login() async {
+    var response = await ApiServices.Login(privateKeyTextController.text);
+
+    HomePage.privateKey = response['privateKey'];
+    HomePage.publicKey = response['publicKey'];
+
+    MyApp.to(context, HomePage());
   }
 }
 

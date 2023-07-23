@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:koin/HomePage.dart';
 import 'package:koin/LoginPage.dart';
 
 class WalletPage extends StatefulWidget {
@@ -75,11 +77,18 @@ class _WalletPageState extends State<WalletPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          "sa32df1as23f1as65fasf45sadasf312asfas312f3asfasfas213fas2f1as32f1as3264asf32as1",
+                          HomePage.privateKey ?? 'N/A',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.copy))
+                      IconButton(
+                          onPressed: () async {
+                            await Clipboard.setData(
+                                ClipboardData(text: HomePage.privateKey ?? ''));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Copied to clipboard')));
+                          },
+                          icon: Icon(Icons.copy))
                     ],
                   ),
                   SizedBox(
@@ -94,11 +103,18 @@ class _WalletPageState extends State<WalletPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          "sa32df1as23f1as65fasf45sadasf312asfas312f3asfasfas213fas2f1as32f1as3264asf32as1",
+                          HomePage.publicKey ?? 'N/A',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.copy))
+                      IconButton(
+                          onPressed: () async {
+                            await Clipboard.setData(
+                                ClipboardData(text: HomePage.publicKey ?? ''));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Copied to clipboard')));
+                          },
+                          icon: Icon(Icons.copy))
                     ],
                   ),
                 ],
