@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 class ApiServices {
@@ -49,9 +51,11 @@ class ApiServices {
   }
 
   static Transfer(String key, String amount) async {
+    dynamic json = jsonEncode({'recipient': key, 'amount': int.parse(amount)});
+    print(json);
     final response = await Dio().post(
       '$baseUrl/transact',
-      data: {'recipient': key, 'amount': amount},
+      data: json,
     );
     if (response.statusCode != 200) return null;
     return response.data;
@@ -76,7 +80,8 @@ class ApiServices {
     RegExp regex = RegExp('[?&]' + name + '(=([^&#]*)|&|#|\$)');
     if (url == null) {
       // You can remove the next line and use your URL directly if you have one.
-      url = '?param=$name'; // Replace 'name' with your UUID (e.g., '75bd5fda-2ff4-447b-b14a-eac3182f988e')
+      url =
+          '?param=$name'; // Replace 'name' with your UUID (e.g., '75bd5fda-2ff4-447b-b14a-eac3182f988e')
     }
     Match? match = regex.matchAsPrefix(url);
     if (match == null) return null;
