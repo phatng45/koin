@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koin/api/ApiServices.dart';
 
 import 'LoginPage.dart';
 
@@ -10,6 +11,22 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  @override
+  void initState() {
+    getHistory();
+    super.initState();
+  }
+
+  List<dynamic>? history;
+
+  void getHistory() async {
+    List<dynamic> response = await ApiServices.GetHistory() as List;
+
+    setState(() {
+      history = response;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,11 +56,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       ),
                     ],
                   ),
-                  _transaction("sdasfasf", "sadasfasf", "asdasfasfas"),
-                  _transaction("sdasfasf", "sadasfasf", "asdasfasfas"),
-                  _transaction("sdasfasf", "sadasfasf", "asdasfasfas"),
-                  _transaction("sdasfasf", "sadasfasf", "asdasfasfas"),
-                  _transaction("sdasfasf", "sadasfasf", "asdasfasfas"),
+                  _buildHistory()
                 ],
               ),
             ),
@@ -53,7 +66,7 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
-  _transaction(String from, String to, String transactionId) {
+  _transaction(String from, String to, String transactionId, String amount) {
     return Padding(
       padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
       child: Column(
@@ -62,14 +75,39 @@ class _HistoryPageState extends State<HistoryPage> {
           Divider(),
           Row(
             children: <Widget>[
-              Text(from),
+              Text(
+                from,
+                overflow: TextOverflow.ellipsis,
+              ),
               Icon(Icons.arrow_right_alt_rounded),
-              Text(to),
+              Expanded(
+                child: Text(
+                  to,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
-          Text('ID: $transactionId')
+          Text('ID: $transactionId'),
+          SizedBox(
+            height: 3,
+          ),
+          Text('Amount $amount')
         ],
       ),
     );
+  }
+
+  _buildHistory() {
+    List<Widget> list = <Widget>[];
+    for (var i = 0; i < (history?.length ?? 0); i++) {
+      list.add(_transaction(
+        history?[i]['input']['address'] ?? 'N/A',
+        history?[i]['outputs'][0]['address'] ?? 'N/A',
+        history?[i]['id'] ?? 'N/A',
+        (history?[i]['outputs'][0]['amount'] ?? '0').toString(),
+      ));
+    }
+    return Column(children: list);
   }
 }
