@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:koin/main.dart';
+import 'package:intl/intl.dart';
+import 'package:koin/api/ApiServices.dart';
 
 import 'LoginPage.dart';
 
@@ -14,21 +15,47 @@ class BlockDetailsPage extends StatefulWidget {
 
 class _BlockDetailsPageState extends State<BlockDetailsPage> {
   @override
+  void initState() {
+    super.initState();
+
+    getBlockDetails();
+  }
+
+  void getBlockDetails() async {
+    var response = await ApiServices.GetBlockDetails(widget.id);
+    setState(() {
+      hash = response['hash'].toString();
+      timeStamp = DateFormat('y MMM d – kk:mm:ss')
+          .format(DateTime.fromMillisecondsSinceEpoch(response['timeStamp']));
+      nonce = response['nonce'].toString();
+      difficulty = response['difficulty'].toString();
+      previousHash = response['previousHash'].toString();
+
+      List<dynamic> data = response['data'] as List;
+      transactions = <Transaction>[];
+
+      transactions = data
+          .map((d) => Transaction(
+                d['id'],
+                d['input']['address'],
+                d['outputs'][0]['address'].toString(),
+                d['outputs'][0]['amount'].toString(),
+              ))
+          .toList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: _buildAppBar(), body: _buildBody());
   }
 
-  late String? id = widget.id;
+  String? hash;
   String? timeStamp;
   String? previousHash;
   String? nonce;
   String? difficulty;
-  List<Transaction>? transactions = [
-    Transaction(),
-    Transaction(),
-    Transaction(),
-    Transaction()
-  ];
+  List<Transaction>? transactions;
 
   _buildBody() {
     return MyContainer(
@@ -52,7 +79,7 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
                   textAlign: TextAlign.left,
                 ),
               ),
-              _text(widget.id),
+              _text(hash ?? 'N/A'),
               Divider(),
               SizedBox(
                 height: 5,
@@ -69,7 +96,7 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
               _iconWithText(Icons.signal_cellular_alt,
                   "Difficulty: ${difficulty ?? 'N/A'}"),
               Divider(),
-              _text("Previous Hash: ${previousHash ?? 'N/A'}"),
+              _text("Previous Hash:\n${previousHash ?? 'N/A'}"),
               Divider(),
               _text("Transactions: "),
               _buildTransactionDetails(),
@@ -77,7 +104,9 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
                 height: 5,
               ),
               Center(
-                  child: ElevatedButton(onPressed: () => Navigator.pop(context), child: Text("Back"))),
+                  child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text("Back"))),
             ],
           ),
         ),
@@ -85,10 +114,11 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
     );
   }
 
-  Text _text(String text) {
+  Text _text(String text, {bool ellipsis = false, Color color = Colors.white}) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.titleMedium,
+      overflow: ellipsis ? TextOverflow.ellipsis : TextOverflow.visible,
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: color),
     );
   }
 
@@ -132,16 +162,12 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
           style: Theme.of(context)
               .textTheme
               .titleMedium
-              ?.copyWith(fontWeight: FontWeight.w600),
+              ?.copyWith(fontWeight: FontWeight.w600, fontSize: 13),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _text(t.from ?? 'N/A'),
-            Icon(Icons.arrow_right_alt_rounded),
-            _text(t.to ?? 'N/A'),
-          ],
-        ),
+        const SizedBox(height: 10,),
+        _text('From: ${t.from ?? 'N/A'}',
+            ellipsis: true, color: Colors.white38),
+        _text('To: ${t.to ?? 'N/A'}', ellipsis: true, color: Colors.white38),
       ]),
     );
   }
@@ -159,4 +185,7 @@ class Transaction {
   String? id;
   String? from;
   String? to;
+  String? amount;
+
+  Transaction(this.id, this.from, this.to, this.amount);
 }
