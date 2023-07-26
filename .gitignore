@@ -29,3 +29,4 @@ doc/api/
 .idea/
 android/
 ios/
+node_modules/
