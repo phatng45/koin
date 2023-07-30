@@ -25,7 +25,7 @@ class _BlockDetailsPageState extends State<BlockDetailsPage> {
     var response = await ApiServices.GetBlockDetails(widget.id);
     setState(() {
       hash = response['hash'].toString();
-      timeStamp = DateFormat('y MMM d – kk:mm:ss')
+      timeStamp = response['timeStamp'] == 'GenesisTime' ? 'GenesisTime' : DateFormat('y MMM d – kk:mm:ss')
           .format(DateTime.fromMillisecondsSinceEpoch(response['timeStamp']));
       nonce = response['nonce'].toString();
       difficulty = response['difficulty'].toString();

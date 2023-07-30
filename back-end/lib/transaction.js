@@ -1,5 +1,6 @@
 const { v4 } = require('uuid');
 const crypto = require("crypto-js");
+const util = require('../util/util');
 
 class Transaction {
     constructor(fromWallet, toAddress, amount) {
@@ -70,7 +71,7 @@ class Transaction {
         let rewardTransaction = new this();
 
         rewardTransaction.outputs = [{
-            amount: config.MINING_REWARD,
+            amount: 100,
             address: minerWallet.publicKey
         }];
 

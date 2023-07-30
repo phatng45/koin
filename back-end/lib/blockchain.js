@@ -29,6 +29,11 @@ class BlockChain {
 
         return true;
     }
+
+    getBlock(index) {
+        if (index < 0 || index > this.chain.length - 1) {return {}};
+        return this.chain[index];
+    }
 };
 
 module.exports = BlockChain;
