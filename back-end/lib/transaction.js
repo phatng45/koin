@@ -9,7 +9,7 @@ class Transaction {
 
         if (fromWallet !== undefined && toAddress !== undefined && amount !== undefined) {
             if (fromWallet.balance < amount) {
-                console.log(`Balance not enough!!!`);
+                console.log(`Insufficient balance`);
                 return;
             }
 
@@ -47,7 +47,7 @@ class Transaction {
         const fromWalletOutput = this.outputs.find(output => output.address === fromWallet.publicKey);
 
         if (fromWalletOutput.amount < amount) {
-            console.log(`Balance not enough!!!`);
+            console.log(`Insufficient balance`);
             return;
         }
 
