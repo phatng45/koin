@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const Blockchain = require('./lib/blockchain');
-const Server = require('./server/Server');
+const Server = require('./server/server');
 const Wallet = require('./lib/wallet');
 const TransactionPool = require('./lib/transactionPool');
 const Miner = require('./lib/miner');
